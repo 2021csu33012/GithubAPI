@@ -24,12 +24,11 @@ function requestRepos(username){
         const fullData = JSON.parse(this.response);
         console.log(fullData);
 
-        for (let i in fullData){
+
             console.log('Followers: ', fullData.followers);
             if (fullData.following != null){
             console.log('Following: ', fullData.following);
             }
-        }
     }
 
     reqFull.send();
@@ -37,3 +36,26 @@ function requestRepos(username){
 }
 
 requestRepos('torvalds');
+
+function eventInfo(username){
+    const reqEvents = new XMLHttpRequest();
+    var pushEvents = 0;
+    var eventType = 'PushEvent';
+    const urlEvents = `https://api.github.com/users/${username}/events`;
+    reqEvents.open('GET', urlEvents, true);
+
+    reqEvents.onload = function(){
+        const eventData = JSON.parse(this.response);
+        console.log(eventData);
+
+        for (let i in eventData){
+            if (eventData[i].type == eventType){
+                pushEvents++;
+            }
+        }
+        console.log('Pushes: ', pushEvents);
+    }
+
+    reqEvents.send();
+}
+eventInfo('torvalds');
