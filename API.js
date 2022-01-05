@@ -11,7 +11,7 @@ function requestRepos(username){
     const reqFollowing = new XMLHttpRequest();
     const urlFull = `https://api.github.com/users/${username}`;
     const url = `https://api.github.com/users/${username}/repos`;
-    const urlFollowers = `https://api.github.com/users/${username}/followers`;
+    const urlFollowers = `https://api.github.com/users/${username}/followers?per_page=100`;
     const urlFollowing = `https:api.github.com/users/${username}/following`;
     reqFull.open('GET', urlFull, true);
     req.open('GET', url, true);
@@ -63,7 +63,7 @@ function eventInfo(username){
     const reqEvents = new XMLHttpRequest();
     var pushEvents = 0;
     var eventType = 'PushEvent';
-    const urlEvents = `https://api.github.com/users/${username}/events`;
+    const urlEvents = `https://api.github.com/users/${username}/events?per_page=100`;
     reqEvents.open('GET', urlEvents, true);
 
     reqEvents.onload = function(){
